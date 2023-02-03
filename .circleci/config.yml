@@ -24,7 +24,8 @@ jobs:
     docker:
       - image: cimg/node:17.2.0
     steps:
-      - run: echo "mything"
+      - run:
+          command: echo "echo-job step command"
   job-with-executor:
     executor: my-docker-exec
     steps:
