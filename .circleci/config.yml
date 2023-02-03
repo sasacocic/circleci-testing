@@ -1,10 +1,14 @@
 version: 2.1
 
+commands:
+  echo-command:
+    steps:
+      - run: echo "static echo"
 
-# commands:
-#   echo-command:
-#     steps:
-# 
+executors:
+  my-docker-exec:
+    docker:
+      - image: cimg/node:17.2.0
 
 jobs:
   hello-job:
@@ -21,6 +25,10 @@ jobs:
       - image: cimg/node:17.2.0
     steps:
       - run: echo "mything"
+  job-with-executor:
+    executor: my-docker-exec
+    steps:
+      - echo-command
 
 workflows:
   my-workflow:
@@ -29,3 +37,6 @@ workflows:
   second-workflow:
     jobs:
       - echo-job
+  third-workflow:
+    jobs:
+      - job-with-executor
