@@ -4,6 +4,10 @@ commands:
   echo-command:
     steps:
       - run: echo "static echo"
+  get-dir:
+    steps:
+      - run:
+          command: pwd
 
 executors:
   my-docker-exec:
@@ -25,7 +29,10 @@ jobs:
       - image: cimg/node:17.2.0
     steps:
       - run:
-          command: echo "echo-job step command"
+          command: |
+           echo "echo-job step command"
+           pwd
+           echo "CWD is: $(pwd)"
   job-with-executor:
     executor: my-docker-exec
     steps:
