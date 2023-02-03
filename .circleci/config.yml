@@ -1,5 +1,11 @@
 version: 2.1
 
+
+# commands:
+#   echo-command:
+#     steps:
+# 
+
 jobs:
   hello-job:
     docker:
@@ -10,8 +16,16 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
+  echo-job:
+    docker:
+      - image: cimg/node:17.2.0
+    steps:
+      - run: echo "mything"
 
 workflows:
   my-workflow:
     jobs:
       - hello-job
+  second-workflow:
+    jobs:
+      - echo-job
