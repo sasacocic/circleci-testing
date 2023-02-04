@@ -37,6 +37,11 @@ jobs:
     executor: my-docker-exec
     steps:
       - echo-command
+  dependent-job:
+    executor: my-docker-exec
+    steps:
+      - run:
+          command: echo "this is the dependent job"
 
 workflows:
   my-workflow:
@@ -49,4 +54,9 @@ workflows:
     jobs:
       - job-with-executor:
           type: approval
-      
+      - dependent-job:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: testing-tag
