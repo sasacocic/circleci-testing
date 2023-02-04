@@ -47,4 +47,6 @@ workflows:
       - echo-job
   third-workflow:
     jobs:
-      - job-with-executor
+      - job-with-executor:
+          type: approval
+      
